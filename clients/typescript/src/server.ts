@@ -1,7 +1,7 @@
 import * as Koa from 'koa';
 import * as Router from 'koa-router';
 import bodyParser = require("koa-bodyparser");
-import { sayHello } from './calc';
+import { sayHello, calculatePrice } from './calc';
 
 const app = new Koa();
 app.use(bodyParser());
@@ -16,7 +16,16 @@ router.post('/feedback', async (ctx) => {
 });
 
 router.post('/order', async (ctx) => {
-    ctx.throw(404)
+    if (ctx.request.body["quantities"] > 1) {
+        ctx.throw(404);
+    }
+
+    if (ctx.request.body["prices"][0] * ctx.request.body["quantities"][0] > 750) {
+        ctx.throw(404);
+    }
+
+
+    return calculatePrice(ctx.request.body);
 });
 
 app.use(router.routes());
