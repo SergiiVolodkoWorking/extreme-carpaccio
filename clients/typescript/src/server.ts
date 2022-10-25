@@ -16,7 +16,8 @@ router.post('/feedback', async (ctx) => {
 });
 
 router.post('/order', async (ctx) => {
-    if (ctx.request.body["prices"] || !ctx.request.body["quantities"]
+    if (!ctx.request.body
+        || !ctx.request.body["prices"] || !ctx.request.body["quantities"]
         || !ctx.request.body["country"] || !ctx.request.body["reduction"]){
         ctx.throw(400);
     }
