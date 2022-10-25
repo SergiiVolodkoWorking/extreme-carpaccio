@@ -16,7 +16,7 @@ router.post('/feedback', async (ctx) => {
 });
 
 router.post('/order', async (ctx) => {
-    // your code here
+    ctx.throw(404)
 });
 
 app.use(router.routes());
