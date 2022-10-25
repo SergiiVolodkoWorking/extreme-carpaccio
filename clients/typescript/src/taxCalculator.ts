@@ -1,9 +1,9 @@
 export function calcTax(amount: number, country: string): number{
     const taxRates: Record<string, number> = {
-        'DE':20,
+        'DE':21,
         'UK':21,
-        'FR':20,
-        'IT':25,
+        'FR':18,
+        'IT':12,
         'ES':19,
         'PL':21,
         'RO':20,
@@ -29,7 +29,17 @@ export function calcTax(amount: number, country: string): number{
         'LU':25,
         'MT':20};
 
-    const rate = taxRates[country];
+
+    let rate = taxRates[country];
+    if (country == 'FR' && amount > 1000) {
+        rate = 25;
+    }
+    if (country == 'IT' && amount > 2000) {
+        rate = 10;
+    }
+    if (country == 'DE' && amount > 3000) {
+        rate = 20;
+    }
 
     const tax = amount * rate / 100;
 
