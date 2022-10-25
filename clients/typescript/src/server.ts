@@ -20,10 +20,6 @@ router.post('/order', async (ctx) => {
         ctx.throw(404);
     }
 
-    if (ctx.request.body["prices"][0] * ctx.request.body["quantities"][0] > 750) {
-        ctx.throw(404);
-    }
-
 
     return calculatePrice(ctx.request.body);
 });
