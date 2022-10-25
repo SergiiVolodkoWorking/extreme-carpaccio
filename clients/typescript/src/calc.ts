@@ -1,6 +1,7 @@
 // more of your code here
 
 import { calcTax } from './taxCalculator';
+import { calcDiscount } from './discountCalculator';
 
 export function sayHello() {
     return "Hello World";
@@ -8,14 +9,18 @@ export function sayHello() {
 
 export function calculatePrice(order: any): { total: number } {
 
-    const itemPrice = order["prices"][0];
-    const quantity = order["quantities"][0];
+    const count = order["prices"].length;
+    let totalPrice = 0;
+    for (let i = 0; i < count; i++) {
+        const itemPrice = order["prices"][i];
+        const quantity = order["quantities"][i];
 
-    let price = itemPrice * quantity;
-
+        totalPrice += itemPrice * quantity;
+    }
     const country = order["country"];
 
-    price = calcTax(price, country)
+    totalPrice = calcTax(totalPrice, country);
+    totalPrice = calcDiscount(totalPrice);
 
-    return { total: Number(price.toFixed(2)) };
+    return { total: Number(totalPrice.toFixed(2)) };
 }

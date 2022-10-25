@@ -21,11 +21,6 @@ router.post('/order', async (ctx) => {
         ctx.throw(400);
     }
 
-    if (ctx.request.body["quantities"] > 1) {
-        ctx.throw(404);
-    }
-
-
     return calculatePrice(ctx.request.body);
 });
 

@@ -19,13 +19,23 @@ describe("Test calc", () => {
         const price = calculatePrice(order);
         const expected = { total : 19.03};
         expect(price).toBe(expected);
-    })
-    // it('works for one item order', () => {
+    });
+
+    // it('works new taxes', () => {
     //
-    //     const order = {"prices":[4.1,8.03,86.83,65.62,44.82],"quantities":[10,3,5,4,5],"country":"AT","reduction":"STANDARD"};
+    //     const order = {"prices":[1001],"quantities":[1],"country":"FR","reduction":"STANDARD"};
     //
     //     const price = calculatePrice(order);
-    //     const expected = {"total":1166.62};
+    //     const expected = { total : 19.03};
     //     expect(price).toBe(expected);
-    // })
+    // });
+
+    it('works for big order', () => {
+
+        const order = {"prices":[4.1,8.03,86.83,65.62,44.82], "quantities":[10,3,5,4,5],"country":"AT","reduction":"STANDARD"};
+
+        const price = calculatePrice(order);
+        const expected = {"total":1166.62};
+        expect(price).toBe(expected);
+    })
 })
