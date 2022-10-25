@@ -16,6 +16,11 @@ router.post('/feedback', async (ctx) => {
 });
 
 router.post('/order', async (ctx) => {
+    if (ctx.request.body["prices"] || !ctx.request.body["quantities"]
+        || !ctx.request.body["country"] || !ctx.request.body["reduction"]){
+        ctx.throw(400);
+    }
+
     if (ctx.request.body["quantities"] > 1) {
         ctx.throw(404);
     }
